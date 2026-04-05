@@ -57,7 +57,6 @@ class BookCollection(Book):
 
     @staticmethod
     def from_dict(data: dict, factory, book_classes=None):
-        """Восстановление подборки с передачей словаря классов"""
         if book_classes is None:
             book_classes = {}
 
@@ -73,9 +72,9 @@ class BookCollection(Book):
                     book = factory.create_book(cls, b["title"], b["author"], b["price"])
                     books.append(book)
                 except Exception as e:
-                    print(f"[ERROR] Не удалось создать книгу {b.get('title')}: {e}")
+                    print(f"Не удалось создать книгу {b.get('title')}: {e}")
             else:
-                print(f"[WARNING] Класс {cls_name} не найден")
+                print(f"Класс {cls_name} не найден")
 
         return BookCollection.create_with_books(theme, books, custom_price)
 

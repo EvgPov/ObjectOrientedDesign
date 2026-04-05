@@ -102,7 +102,7 @@ class FileRepository(OrderRepository):
                         )
                         items.append(book)
                     else:
-                        print(f"[WARNING] Класс {cls_name} не найден")
+                        print(f"Класс {cls_name} не найден")
 
             order = Order(reader_id=d.get('reader_id', 0), items=items)
             order.set_order_id(d.get('order_id', 0))
