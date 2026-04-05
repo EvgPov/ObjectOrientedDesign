@@ -1,4 +1,4 @@
-class OrderService():
+class OrderService:
     def __init__(self, repository):
         self.repository = repository
 
@@ -14,5 +14,5 @@ class OrderService():
     def change_status(self, order_id, new_status):
         order = self.get_by_id(order_id)
         if order is not None:
-            order.status = new_status
+            order.change_status(new_status)
             print(f"Статус заказа №{order_id} изменен на {new_status}")

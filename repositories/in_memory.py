@@ -2,20 +2,19 @@ from repositories.base import OrderRepository
 
 class InMemoryOrderRepository(OrderRepository):
     def __init__(self):
-        self.orders = []
-        self.index_id = 1
+        self.__orders = []
+        self._index_id = 1
 
     def add(self, order):
-        order.order_id = self.index_id
-        self.orders.append(order)
-        self.index_id += 1
-        print(f"Заказ №{order.ordr_id} сохранен в память")
+        order.set_order_id(self._index_id)
+        self.__orders.append(order)
+        self._index_id += 1
 
     def get_all(self):
-        return self.orders
+        return self.__orders.copy()
 
     def get_by_id(self, order_id):
-        for order in self.orders:
-            if order.order_id == order_id:
+        for order in self.__orders:
+            if order.get_order_id() == order_id:
                 return order
         return None

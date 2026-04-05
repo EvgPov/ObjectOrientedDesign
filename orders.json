@@ -1,0 +1,76 @@
+[
+  {
+    "order_id": 1,
+    "reader_id": 101,
+    "date": "2026-04-05T20:26:34.805269",
+    "status": "Оформлен",
+    "items": [
+      {
+        "type": "book",
+        "class": "ScienceBook",
+        "title": "Краткая история времени",
+        "author": "Стивен Хокинг",
+        "price": 520
+      },
+      {
+        "type": "book",
+        "class": "ArtBook",
+        "title": "Искусство войны",
+        "author": "Сунь-цзы",
+        "price": 300
+      },
+      {
+        "type": "collection",
+        "theme": "Лучшая фантастика",
+        "custom_price": null,
+        "books": [
+          {
+            "class": "FantasyBook",
+            "title": "Дюна",
+            "author": "Фрэнк Герберт",
+            "price": 450
+          },
+          {
+            "class": "FantasyBook",
+            "title": "451 градус по Фаренгейту",
+            "author": "Рэй Брэдбери",
+            "price": 380
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "order_id": 2,
+    "reader_id": 102,
+    "date": "2026-04-05T20:26:34.805293",
+    "status": "Оформлен",
+    "items": [
+      {
+        "type": "collection",
+        "theme": "IT для начинающих",
+        "custom_price": 10000,
+        "books": [
+          {
+            "class": "ProgrammingBook",
+            "title": "Компьютерные сети",
+            "author": "Эндрю Таненбаум, Дэвид Уэзеролл",
+            "price": 2300
+          },
+          {
+            "class": "ProgrammingBook",
+            "title": "Архитектура компьютера",
+            "author": "Эндрю Таненбаум, Тодд Остин",
+            "price": 1200
+          },
+          {
+            "class": "ProgrammingBook",
+            "title": "Структуры данных и алгоритмы Java",
+            "author": "Роберт Лафоре",
+            "price": 3000
+          }
+        ]
+      }
+    ]
+  }
+]
