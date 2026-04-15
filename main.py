@@ -2,19 +2,22 @@ from builders.collection_builder import BookCollectionBuilder
 from factories.book_factory import BookFactory
 from models.book import FantasyBook, ScienceBook, ArtBook, ChildrenBook, DetectiveBook,  ProgrammingBook
 from models.order import Order
-from models.collection import BookCollection
+from repositories.db import DBRepository
 from repositories.in_file import FileRepository
 from repositories.in_memory import InMemoryOrderRepository
 from services.order_service import OrderService
 
 
 def main():
-    choice = input("Выберите тип хранилища:\n1. В памяти\n2. В файле\nВаш выбор: ")
+    choice = input("Выберите тип хранилища:\n1. В памяти\n2. В файле\n3. В базе данных\nВаш выбор: ")
 
-    if choice == '1':
-         repository = InMemoryOrderRepository()
-    else:
-         repository = FileRepository()
+    match choice:
+        case "1":
+            repository = InMemoryOrderRepository()
+        case "2":
+            repository = FileRepository()
+        case "3":
+            repository = DBRepository()
 
     service = OrderService(repository)
     factory = BookFactory()
@@ -75,7 +78,7 @@ def main():
         i +=  1
 
     # Меняем статус
-    service.change_status(1, "Выдан")
+    service.change_status(1, "ready")
 
 if __name__ == "__main__":
     main()

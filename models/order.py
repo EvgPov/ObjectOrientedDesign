@@ -6,7 +6,7 @@ class Order:
         self.__reader_id = reader_id
         self.__items = items
         self.__date = datetime.now()
-        self.__status = 'Оформлен'
+        self.__status = 'created'
 
     def get_order_id(self):
         return self.__order_id
