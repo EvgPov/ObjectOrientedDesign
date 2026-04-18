@@ -11,6 +11,8 @@ from services.order_service import OrderService
 def main():
     choice = input("Выберите тип хранилища:\n1. В памяти\n2. В файле\n3. В базе данных\nВаш выбор: ")
 
+    repository = None
+
     match choice:
         case "1":
             repository = InMemoryOrderRepository()
@@ -18,10 +20,12 @@ def main():
             repository = FileRepository()
         case "3":
             repository = DBRepository()
+        case _:
+            print("Ошибка: Неверный выбор! Программа завершена.")
+            return
 
     service = OrderService(repository)
     factory = BookFactory()
-    builder = BookCollectionBuilder()
 
     # Создаем книги через фабрику
     book1 = factory.create_book(FantasyBook, "Дюна", "Фрэнк Герберт", 450)
@@ -32,7 +36,6 @@ def main():
     book5 = factory.create_book(ProgrammingBook, "Компьютерные сети", "Эндрю Таненбаум, Дэвид Уэзеролл", 2300)
     book6 = factory.create_book(ProgrammingBook, "Архитектура компьютера", "Эндрю Таненбаум, Тодд Остин", 1200)
     book7 = factory.create_book(ProgrammingBook, "Структуры данных и алгоритмы Java", "Роберт Лафоре", 3000)
-
 
     print("\nКниги созданы:")
     print('\n'.join(f"\n{i}. {book.get_info()}" for i, book in enumerate([book1,
@@ -60,13 +63,26 @@ def main():
     print("\nПодборка по программированию создана:")
     print(collection_programming.get_info())
 
+    if choice == "3":
+        print("\n→ Добавляем данные в базу...")
+        print("\n→ Книги")
+        # добавляем книги в базу данных
+        for book in [book1, book2, book3, book4, book5, book6, book7]:
+            repository.add_book(book)
+        print("\n→ Коллекции")
+        # добавляем коллекции в базу данных
+        repository.add_collection(collection_fantasy)
+        repository.add_collection(collection_programming)
+
     # Создаем заказы
     order1 = Order(101, [book3, book4, collection_fantasy])
     order2 = Order(102, [collection_programming])
+    order3 = Order(103, [book1, book2, book3, book4, book5, book6, book7])
 
     # Сохраняем заказы
     service.add(order1)
     service.add(order2)
+    service.add(order3)
 
     # Показываем все заказы
     print("\n=== Все заказы ===")
@@ -77,8 +93,13 @@ def main():
         print("-------------------")
         i +=  1
 
-    # Меняем статус
-    service.change_status(1, "ready")
+    # Показываем конкретный заказ
+    print("\n=== Конкретный заказ ===")
+    particular_orders = service.get_by_id(1)
+    print(particular_orders.get_info())
+
+    particular_orders = service.get_by_id(3)
+    print(particular_orders.get_info())
 
 if __name__ == "__main__":
     main()

@@ -21,6 +21,9 @@ class BookCollection(Book):
     def get_title(self):
         return self._theme
 
+    def get_books(self):
+        return self._books.copy()
+
     def get_author(self):
         if not self._books:
             return "Нет авторов"
